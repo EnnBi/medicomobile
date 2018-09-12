@@ -1,0 +1,32 @@
+page-login {
+    div#logo {
+        margin-top: 25px;
+        margin-bottom: 12px;
+    }
+    .content {
+        background-color: white;
+    }
+    .item {
+        background-color: white;
+    }
+    /* ion-label {
+        color: color($colors, primary);
+        text-align: center;
+        margin: 0;
+    } */
+    .label {
+        margin: 0 0 5px 0;
+    }
+    /* ion-input {
+        background-color: #fff;
+        border-radius: 500px;
+        border: #488AFF solid 1px;
+        margin: 0 0 25px 0;
+    } */
+    .segment-activated {
+        border-color: #488AFF!important;
+    }
+    .segment-button {
+        color: #488AFF !important;
+    }
+}

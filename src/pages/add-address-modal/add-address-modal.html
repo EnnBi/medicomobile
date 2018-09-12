@@ -1,0 +1,50 @@
+<!--
+  Generated template for the AddAddressModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Add Address</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label stacked>Name</ion-label>
+            <ion-input type="text" name="name" [(ngModel)]="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Address</ion-label>
+            <ion-input type="text" [(ngModel)]="address"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Landmark</ion-label>
+            <ion-input type="text" [(ngModel)]="landmark"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Contact No</ion-label>
+            <ion-input type="text" [(ngModel)]="contact"></ion-input>
+        </ion-item>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-6 col-md-6 col-lg-6 col-xl-6 *ngIf="!edit; else update">
+                    <button ion-button outline block (click)="addAddress()">Confirm</button>
+                </ion-col>
+                <ng-template #update>
+                    <ion-col col-6 col-md-6 col-lg-6 col-xl-6>
+                        <button ion-button outline block (click)="addAddress()">Update</button>
+                    </ion-col>
+                </ng-template>
+                <ion-col col-6 col-md-6 col-lg-6 col-xl-6>
+                    <button ion-button color="danger" outline block (click)="close()">Cancel</button> </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+</ion-content>

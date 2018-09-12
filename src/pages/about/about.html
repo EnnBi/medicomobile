@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar *ngIf="!isSearch">
+        <ion-title>Search</ion-title>
+        <ion-buttons end>
+            <button ion-button large (click)="searchBar()">
+                <ion-icon name="search" right style="font-size: 2em;margin-right: 2px;"></ion-icon>
+            </button>
+            <button ion-button large (click)="openCart()">
+                    <ion-badge style="background-color: #ff4848;" *ngIf="cartSize>0">{{cartSize}}</ion-badge>
+                  <ion-icon name="briefcase" right style="font-size: 2em;margin-right: 10px;"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-navbar *ngIf="isSearch">
+        <ion-searchbar #searchbar showCancelButton cancelButtonText="Cancel" (ionCancel)="onCancel($event)" (ionInput)="searchMedicineOnQuery()" [(ngModel)]="search" style="display: inline-block;width: 88%;"></ion-searchbar>
+        <ion-buttons style="display: inline-block;width: 10%;">
+            <button ion-button (click)="openCart()">
+                  <ion-badge style="background-color: #ff4848;" *ngIf="cartSize>0">{{cartSize}}</ion-badge>
+                  <ion-icon name="briefcase" right style="font-size: 2em;margin-right: 10px;"></ion-icon>
+                </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+
+<!--class="search"-->
+<ion-content padding [style.opacity]="opacity?0.1:1">
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6 col-md-3 col-lg-2 col-xl-2 style="border: #f1eeee 1px solid;padding: 15px;" *ngFor="let m of searchMedicinesList">
+                <h2 style="text-align: center;margin-bottom: 0px !important;">{{m.name}}</h2>
+                <p style="text-align: center;color: #959595;margin-top: 6px">{{m.description}}</p>
+                <ion-row>
+                    <ion-label style="font-weight: lighter;font-size: 1em; margin-top: 0px !important;margin-bottom: 10px !important;">{{m.dosage}}</ion-label>
+                    <ion-label style="font-weight: bold;font-size: 1em;color: #488AFF;text-align: right; margin-top: 0px !important;margin-bottom: 10px !important;">₹{{m.price}}</ion-label>
+                </ion-row>
+                <ion-buttons text-center>
+                    <button ion-button name="primary" (click)="presentQuantityModal(m.id)">Add to Bag</button>
+                </ion-buttons>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-fab (click)="presentModal()" right bottom>
+        <button ion-fab>
+            <ion-icon name="add" ></ion-icon>
+          </button>
+    </ion-fab>
+    <ion-infinite-scroll (ionInfinite)="querySearch?getMoreOnSearchQuery($event):getMoreOnPageLoad($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,142 @@
+<!--
+  Generated template for the CartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Cart</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style=" background-color: #EEEEF8;">
+    <div *ngIf="medicinesList.length>0 || textMedicineList.length>0; else emptyCart">
+        <ion-grid style="background-color: white;padding-bottom: 0px;" padding-horizontal margin-top *ngIf="medicinesList.length>0">
+            <ion-row style="border-bottom: #dcdcd7 1px solid;">
+                <h5 style="color:#888">Medicines</h5>
+            </ion-row>
+            <ion-row *ngFor="let m of medicinesList,let i = index" style="border-bottom: #dcdcd7 1px solid;">
+                <ion-col col-6 col-md-3 col-lg-3 col-xl-3>
+                    <h2 text-nowrap>{{m.medicine.name}}</h2>
+                    <p style="color: #bcb7b7;font-size: 1em;">{{m.medicine.description}}</p>
+                </ion-col>
+                <ion-col col-3 col-md-3 col-lg-3 col-xl-3 text-center>
+                    <ion-icon name="remove-circle" (click)="decrement(i,true)" large style="font-size: 2em;color:#488AFF"></ion-icon>
+                    <p style="font-size:2em;display: inline-block;margin-left: 5px;margin-right:5px">{{m.quantity}}</p>
+                    <ion-icon name="add-circle" (click)="increment(i,true)" large style="font-size: 2em;color:#488AFF"></ion-icon>
+
+                </ion-col>
+                <ion-col col-3 col-md-3 col-lg-3 col-xl-3 text-end>
+                    <ion-icon name="trash" style="font-size: 2.0em;" padding-top (click)="delete(i,true)"></ion-icon>
+                    <p style="margin-bottom: 0px;margin-top: 46px;font-size: 1.15em;color: #488AFF;">₹{{(m.medicine.price * m.quantity) | number : '1.2-2'}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid style="background-color: white;padding-bottom: 0px;" padding-horizontal margin-top *ngIf="medicinesList.length>0">
+            <ion-row style="border-bottom: #dcdcd7 1px solid;height: 3.3em">
+                <ion-col col-6 col-md-3 col-lg-3 col-xl-3 text-right>
+                    <h3 style="padding-bottom: 0px;margin-top: 0.6rem;">Total:</h3>
+                </ion-col>
+                <ion-col col-6 col-md-3 col-lg-3 col-xl-3 text-right>
+                    <h3 style="margin-bottom: 0rem;margin-top: 0.6rem;">₹{{total | number : '1.2-2'}}</h3>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <!--Text Medicines-->
+        <ion-grid style="background-color: white;padding-bottom: 0px;" padding-horizontal margin-top *ngIf="textMedicineList.length>0">
+            <ion-row style="border-bottom: #dcdcd7 1px solid;">
+                <h5 style="color:#888">Your added Medicines</h5>
+            </ion-row>
+            <ion-row *ngFor="let m of textMedicineList,let i = index" style="border-bottom: #dcdcd7 1px solid;">
+                <ion-col col-6 col-md-3 col-lg-3 col-xl-3>
+                    <h2 text-nowrap>{{m.textMedicine.name}}</h2>
+                    <h2 style="color: #bcb7b7;font-size: 1em;margin-bottom: 2px;">{{m.textMedicine.company}}</h2>
+                    <p style="font-size: 1.15em;color: #bcb7b7;margin-bottom: 0px;margin-top: 0px;">{{m.textMedicine.dosage}}</p>
+                </ion-col>
+                <ion-col col-3 col-md-3 col-lg-3 col-xl-3 text-center>
+                    <ion-icon name="remove-circle" (click)="decrement(i,false)" large style="font-size: 2em;color:#488AFF"></ion-icon>
+                    <p style="font-size:2em;display: inline-block;margin-left: 5px;margin-right:5px">{{m.quantity}}</p>
+                    <ion-icon name="add-circle" (click)="increment(i,false)" large style="font-size: 2em;color:#488AFF"></ion-icon>
+
+                </ion-col>
+                <ion-col col-3 col-md-3 col-lg-3 col-xl-3 text-end margin-vertical>
+                    <ion-icon name="trash" style="font-size: 2.0em;" padding-top (click)="delete(i,flase)"></ion-icon>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid style="background-color: white;padding-bottom: 0px;" padding-horizontal margin-top *ngIf="!prescriptionPhoto; else image">
+            <ion-row style="border-bottom: #dcdcd7 1px solid;height: 3.3em">
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3 text-right style="padding-top: 0px;">
+                    <ion-buttons text-center>
+                        <button ion-button name="primary" (click)="takePicture()" style="width: 100%;">Take Prescription Photo</button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ng-template #image>
+            <ion-grid style="background-color: white;padding-bottom: 0px;" padding-horizontal margin-top>
+                <ion-row style="border-bottom: #dcdcd7 1px solid;height: 20.3em;">
+                    <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;" text-center>
+                        <img [src]="prescriptionPhoto" style="width: 70%;max-height: 20em !important;" (click)="takePicture()">
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ng-template>
+        <ion-grid style="background-color: white;padding-bottom: 0px;" padding-horizontal margin-top *ngIf="!address && prescriptionPhoto ">
+            <ion-row>
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style=" padding-top: 0px; ">
+                    <ion-buttons text-center>
+                        <button ion-button name="primary " style="width:100%" (click)="showAddressModal()">Choose Address</button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div *ngIf="address">
+            <ion-grid style="background-color: white;padding-bottom: 0px;" padding-horizontal margin-top>
+                <ion-row>
+                    <ion-col col-6 col-md-6 col-lg-4 col-xl-3 style=" padding-top: 0px; ">
+                        <h6>{{address.name}}</h6>
+                        <p style="color: #bcb7b7;font-size: 1em;">{{address.address}},{{address.landmark}}</p>
+                    </ion-col>
+                    <ion-col col-6 col-md-6 col-lg-4 col-xl-3 style=" padding-top: 0px; " text-end>
+                        <h5>{{address.contact}}</h5>
+                        <ion-buttons>
+                            <button ion-button name="primary " (click)="editAddressModal()" style="width: 50%;">
+                                <ion-icon name="create" style="margin-right: 10px;"></ion-icon>Edit
+                            </button>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid style="background-color: white;padding-bottom: 0px;" padding-horizontal margin-top>
+                <ion-row>
+                    <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style=" padding-top: 0px; ">
+                        <ion-buttons text-center>
+                            <button ion-button name="primary" style="width:100%" (click)="placeOrder()">Place Order</button>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+    <ng-template #emptyCart>
+        <ion-grid style="background-color: white;padding-bottom: 0px;height: 50%;" padding-horizontal margin-top>
+            <ion-row style="margin-top: 20%;">
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3>
+                    <p text-center>Your medicine bag is empty.</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style=" padding-top: 0px; ">
+                    <ion-buttons text-center style="width:100%">
+                        <button ion-button name="primary " (click)="gotoHome()">View Medicines</button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ng-template>
+</ion-content>

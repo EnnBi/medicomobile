@@ -1,0 +1,229 @@
+[{
+        "id": 1,
+        "name": "Aciloc",
+        "description": "good",
+        "company": {
+            "id": 1,
+            "name": "Abott",
+            "description": "Abott"
+        },
+        "unit": {
+            "id": 1,
+            "name": "Strip",
+            "description": "Strip of 10 tablets"
+        },
+        "price": 15,
+        "type": {
+            "id": 1,
+            "name": "Tablet"
+        },
+        "operator": {
+            "id": 2,
+            "firstName": "TEchnician",
+            "lastName": "TWo",
+            "password": "admin",
+            "email": "task@gl.com",
+            "image": null,
+            "enabled": false,
+            "role": {
+                "id": 2,
+                "name": "OPERATOR"
+            }
+        },
+        "images": [
+            "/assets/files/Aciloc.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/Aciloc1.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/Aciloc2.jpg"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Pantop",
+        "description": "good",
+        "company": {
+            "id": 2,
+            "name": "Sun Pharma",
+            "description": "Sun Pharma"
+        },
+        "unit": {
+            "id": 1,
+            "name": "Strip",
+            "description": "Strip of 10 tablets"
+        },
+        "price": 50,
+        "type": {
+            "id": 2,
+            "name": "Capsule"
+        },
+        "operator": {
+            "id": 2,
+            "firstName": "TEchnician",
+            "lastName": "TWo",
+            "password": "admin",
+            "email": "task@gl.com",
+            "image": null,
+            "enabled": false,
+            "role": {
+                "id": 2,
+                "name": "OPERATOR"
+            }
+        },
+        "images": [
+            "/assets/files/Pantop.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/Pantop1.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/Pantop2.jpg"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Mincid Plus",
+        "description": "Mincid Plus",
+        "company": {
+            "id": 3,
+            "name": "GlaxoSmithKline",
+            "description": "GlaxoSmithKline"
+        },
+        "unit": {
+            "id": 2,
+            "name": "Bottle",
+            "description": "Bottle"
+        },
+        "price": 96,
+        "type": {
+            "id": 3,
+            "name": "Bottle"
+        },
+        "operator": {
+            "id": 2,
+            "firstName": "TEchnician",
+            "lastName": "TWo",
+            "password": "admin",
+            "email": "task@gl.com",
+            "image": null,
+            "enabled": false,
+            "role": {
+                "id": 2,
+                "name": "OPERATOR"
+            }
+        },
+        "images": [
+            "/assets/files/Mincid.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/Mincid Plus1.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/Mincid Plus2.jpg"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "ABOCAL",
+        "description": "CALCIUM 500MG+CHOLECALCIFEROL 500IU",
+        "company": {
+            "id": 1,
+            "name": "Abott",
+            "description": "Abott"
+        },
+        "unit": {
+            "id": 1,
+            "name": "Strip",
+            "description": "Strip of 10 tablets"
+        },
+        "price": 98,
+        "type": {
+            "id": 2,
+            "name": "Capsule"
+        },
+        "operator": {
+            "id": 4,
+            "firstName": "Nadeem",
+            "lastName": "Baba",
+            "password": "admin",
+            "email": "nadeem@gmail.com",
+            "image": null,
+            "enabled": true,
+            "role": {
+                "id": 1,
+                "name": "ADMIN"
+            }
+        },
+        "images": [
+            "/assets/files/Abocal.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/ABOCAL1.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/ABOCAL2.jpg"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "LEVILEX SYRUP",
+        "description": "LEVETIRACETAM 100MG",
+        "company": {
+            "id": 1,
+            "name": "Abott",
+            "description": "Abott"
+        },
+        "unit": {
+            "id": 2,
+            "name": "Bottle",
+            "description": "Bottle"
+        },
+        "price": 354,
+        "type": {
+            "id": 3,
+            "name": "Bottle"
+        },
+        "operator": {
+            "id": 4,
+            "firstName": "Nadeem",
+            "lastName": "Baba",
+            "password": "admin",
+            "email": "nadeem@gmail.com",
+            "image": null,
+            "enabled": true,
+            "role": {
+                "id": 1,
+                "name": "ADMIN"
+            }
+        },
+        "images": [
+            "/assets/files/Levilex.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/LEVILEX SYRUP1.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/LEVILEX SYRUP2.jpg"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "MEGAMOX CV",
+        "description": "AMOXICILLIN 500MG+CLAVULANATE(CLAVULANIC ACID) 125MG",
+        "company": {
+            "id": 1,
+            "name": "Abott",
+            "description": "Abott"
+        },
+        "unit": {
+            "id": 1,
+            "name": "Strip",
+            "description": "Strip of 10 tablets"
+        },
+        "price": 157,
+        "type": {
+            "id": 2,
+            "name": "Capsule"
+        },
+        "operator": {
+            "id": 4,
+            "firstName": "Nadeem",
+            "lastName": "Baba",
+            "password": "admin",
+            "email": "nadeem@gmail.com",
+            "image": null,
+            "enabled": true,
+            "role": {
+                "id": 1,
+                "name": "ADMIN"
+            }
+        },
+        "images": [
+            "/assets/files/Megamox.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/MEGAMOX CV1.jpg",
+            "E:\\Nadeem\\Waruq_Projects\\images/MEGAMOX CV2.jpg"
+        ]
+    }
+]

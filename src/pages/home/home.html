@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Home</ion-title>
+        <ion-buttons end>
+            <button ion-button>
+              <ion-icon name="briefcase" right style="font-size: 2em;margin-right: 10px;"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="content" padding>
+    <ion-scroll scrollY="true" style="height: 50%;" *ngIf="medicinesList.length>0">
+        <ion-list>
+            <ion-list-header style="background: #488AFF;color: white;text-align: center;font-size: 15px;font-weight: bold" ion-fixed>
+                Medicines List
+            </ion-list-header>
+            <div *ngFor="let m of medicinesList; let i = index;">
+                <ion-item *ngIf="m" (swipeRight)="editItem(i)" (swipeLeft)="removeItem(i)">
+                    <h1 style="display: inline-block;width:50%">{{m.name}}</h1>
+                    <span style="display: inline-block;width:47%;text-align: right">{{m.dosage}}</span>
+                    <div style="clear: both;"></div>
+                    <p style="display: inline-block;width:50%">{{m.company}}</p>
+                    <span style="display: inline-block;width:47%;text-align: right">{{m.quantity}}</span>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-scroll>
+    <ion-card (click)="takePicture()" [class.card-with-list]="medicinesList.length>0?true:null" [class.card-without-list]="medicinesList.length<=0?true:null">
+        <ion-card-header class="photoheader">
+            Prescription Photo
+        </ion-card-header>
+        <ion-card-content style="text-align: center;width:100%" *ngIf="base64Image; else icon" style="padding-left:0px;padding-right:0px  ">
+            <img [src]="base64Image" width="200px !important" />
+        </ion-card-content>
+        <ng-template #icon>
+            <ion-card-content style="text-align: center">
+                <ion-icon name="camera" [class.camera-with-list]="medicinesList.length>0?true:null" [class.camera-without-list]="medicinesList.length<=0?true:null"></ion-icon>
+            </ion-card-content>
+        </ng-template>
+    </ion-card>
+    <ion-fab (click)="presentModal()" right [attr.middle]="medicinesList.length>0?true:null" [attr.bottom]="medicinesList.length<=0?true:null" style="margin-top:-50px">
+        <button ion-fab>
+            <ion-icon name="add" ></ion-icon>
+          </button>
+    </ion-fab>
+</ion-content>

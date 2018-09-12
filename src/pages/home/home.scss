@@ -1,0 +1,60 @@
+page-home {
+    ion-card {
+        height: 200px;
+        border-radius: 8px!important;
+        border-style: solid;
+        border-width: 2px;
+        border-color: $mainblue;
+    }
+    .submitbtn {
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 6px
+    }
+    .photoheader {
+        text-align: center;
+        color: #ffffff;
+        background-color: $mainblue;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .content {
+        background-color: $lightblue;
+        overflow-y: auto;
+    }
+     ::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+        display: none;
+    }
+    .header-style {
+        background-color: #488AFF;
+        color: white;
+        text-align: center;
+        font-style: italic;
+        font-weight: bold;
+        height: 15%;
+        font-size: 15px;
+    }
+    .med-row {
+        text-align: center;
+        border-bottom: #488AFF solid 1px;
+    }
+    .camera-without-list {
+        font-size: 18em!important;
+        color: #488AFF
+    }
+    .camera-with-list {
+        font-size: 15em !important;
+        color: #488AFF
+    }
+    .card-without-list {
+        height: 60%!important;
+        margin-top: 20%
+    }
+    .card-with-list {
+        height: 50%!important;
+    }
+    .noscroll {
+        overflow: hidden;
+    }
+}

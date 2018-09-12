@@ -1,0 +1,11 @@
+page-contact {
+     ::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+        display: none;
+    }
+    ion-card {
+        border-style: solid;
+        border-width: 1px;
+        border-color: #488aff;
+    }
+}

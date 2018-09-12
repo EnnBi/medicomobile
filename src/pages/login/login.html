@@ -1,0 +1,83 @@
+<!--<ion-header>
+
+  <ion-navbar>
+    <ion-title>Temo Chat Theme fo Ionic</ion-title>
+  </ion-navbar>
+
+</ion-header>-->
+
+
+<ion-content padding [style.opacity]="opacity?0.1:1">
+
+    <div id="logo" padding text-center>
+        <img src="./assets/imgs/logo.png" width="50%">
+    </div>
+
+    <div padding>
+        <ion-segment [(ngModel)]="opt" color="light">
+            <ion-segment-button value="signin">
+                Sign In
+            </ion-segment-button>
+            <ion-segment-button value="signup">
+                Sign Up
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+    <div [ngSwitch]="opt">
+        <form (submit)="login()" *ngSwitchCase="'signin'" [formGroup]="signinForm">
+            <ion-item margin-vertical>
+                <ion-label floating>Username</ion-label>
+                <ion-input type="email" formControlName="email" name="email"></ion-input>
+            </ion-item>
+
+            <ion-item margin-vertical>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" formControlName="password" name="password"></ion-input>
+            </ion-item>
+
+            <div padding text-center>
+                <button ion-button round color="primary" icon-right>
+              {{ 'SIGNIN'}} <ion-icon name="log-in"></ion-icon>
+            </button>
+            </div>
+
+
+        </form>
+
+        <form (submit)="signUp()" *ngSwitchCase="'signup'" [formGroup]="signupForm">
+            <ion-item margin-vertical>
+                <ion-label floating>{{ 'First Name'}}</ion-label>
+                <ion-input type="text" name="firstName" formControlName="firstName"></ion-input>
+            </ion-item>
+            <ion-item margin-vertical>
+                <ion-label floating>{{ 'Last Name'}}</ion-label>
+                <ion-input type="text" name="lastName" formControlName="lastName"></ion-input>
+            </ion-item>
+            <ion-item margin-vertical>
+                <ion-label floating>{{ 'Email'}}</ion-label>
+                <ion-input type="email" name="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item margin-vertical>
+                <ion-label floating>{{ 'Password'}}</ion-label>
+                <ion-input type="password" name="password" formControlName="password"></ion-input>
+            </ion-item>
+
+            <ion-item margin-vertical>
+                <ion-label floating>{{ 'Retry Password'}}</ion-label>
+                <ion-input type="password" name="confirmPassword" formControlName="confirmPassword"></ion-input>
+            </ion-item>
+            <!-- <ion-item>
+                <p *ngIf="form.controls['confirmPassword'].errors && form.controls['confirmPassword'].dirty" color="danger">Passwords do not match</p>
+            </ion-item> -->
+            <div padding text-center>
+                <button ion-button round color="primary" icon-right [disabled]="!signupForm.valid">
+              {{ 'SIGNUP'}} <ion-icon name="person-add"></ion-icon>
+            </button>
+            </div>
+
+
+        </form>
+
+    </div>
+</ion-content>

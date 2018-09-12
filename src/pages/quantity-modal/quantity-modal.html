@@ -1,0 +1,25 @@
+<!--
+  Generated template for the QuantityModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Add Quantity</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-row style="height: 70px;">
+        <ion-icon name="remove-circle" (click)="decrement()" large style="font-size: 4em;margin-left: 8%;color:#488AFF"></ion-icon>
+        <p style="font-size: 4em;margin-top:0px;margin-right: 20px;margin-left: 20px">{{quantity}}</p>
+        <ion-icon name="add-circle" (click)="increment()" large style="font-size: 4em;color:#488AFF"></ion-icon>
+    </ion-row>
+    <ion-buttons text-center>
+        <button ion-button (click)="addToCart()">Add to Bag</button>
+    </ion-buttons>
+</ion-content>

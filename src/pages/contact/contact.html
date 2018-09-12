@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            My Account
+        </ion-title>
+        <!-- <ion-buttons end>
+            <button ion-button>
+              <ion-icon name="cart" right></ion-icon>
+            </button>
+        </ion-buttons> -->
+    </ion-navbar>
+</ion-header>
+
+<ion-content style=" background-color: #F8F8F9;">
+    <ion-list>
+        <ion-item style="margin-top: 4%">
+            <ion-row>
+                <ion-col col-3>
+                    <ion-thumbnail item-start>
+                        <img src='{{user?.image?imagePath+user.image:"assets/imgs/boy.png"}}'>
+                        <ion-icon name='camera' style="position: relative;float: right;margin-top: -17px;" (click)="uploadPhoto()"></ion-icon>
+                    </ion-thumbnail>
+                </ion-col>
+                <ion-col col-9 style="margin: auto;width: 100%;padding-left: 15%;">
+                    <h1>{{user?.firstName}} {{user?.lastName}}</h1>
+                    <h3>{{user?.email}}</h3>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item style="margin-top: 7%" (click)="viewOrders()">
+            Orders
+            <ion-icon name="arrow-dropright" style=" float: right;"></ion-icon>
+        </ion-item>
+        <ion-item (click)="viewCart()">
+            Cart
+            <ion-icon name="arrow-dropright" style=" float: right;"></ion-icon>
+        </ion-item>
+        <!--         <ion-item>
+            Addresses
+            <ion-icon name="arrow-dropright" style=" float: right;"></ion-icon>
+        </ion-item> -->
+    </ion-list>
+
+</ion-content>
+<ion-footer style="margin-bottom: 4%;background-color: white;bottom: 56px;padding-top: 10px;">
+    <ion-buttons center style="text-align: center" (click)="signout()">
+        <button ion-button style="width: 90%;font-size: 1em">Sign Out</button>
+    </ion-buttons>
+</ion-footer>
