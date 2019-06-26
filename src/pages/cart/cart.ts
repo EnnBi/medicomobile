@@ -49,20 +49,30 @@ export class CartPage {
  
   increment(i,listType:boolean){ 
     if(listType){
-      this.medicinesList[i].quantity = this.medicinesList[i].quantity+1;
-      this.getTotal();
+      if(this.medicinesList[i].quantity<99){
+        this.medicinesList[i].quantity = this.medicinesList[i].quantity+1;
+        this.getTotal();
+      }
     }
-    else
-      this.textMedicineList[i].quantity = Number(this.textMedicineList[i].quantity)+1;
+    else{
+      if(this.textMedicineList[i].quantity<99)
+        this.textMedicineList[i].quantity = Number(this.textMedicineList[i].quantity)+1;
+    }
+      
   }
 
   decrement(i,listType:boolean){
     if(listType){
+      if(this.medicinesList[i].quantity>1){
       this.medicinesList[i].quantity = this.medicinesList[i].quantity-1;
       this.getTotal();
+      }
     }
-    else
-      this.textMedicineList[i].quantity = this.textMedicineList[i].quantity-1;
+    else{
+      if(this.textMedicineList[i].quantity>1){
+        this.textMedicineList[i].quantity = this.textMedicineList[i].quantity-1;
+      }
+    }
   }
   
 
@@ -93,21 +103,29 @@ export class CartPage {
     mediaType: this.camera.MediaType.PICTURE
   }
    
-  takePicture(){
+  takePicture(){ 
+    let loading = this.loadingCtrl.create({
+      content: 'Uploading Prescription Photo...'
+    });
+    
+    this.uploadPhoto(loading);
+  }
+  async uploadPhoto(loading){
+    loading.present();  
+    console.log('loader should be presented')
     this.camera.getPicture(this.options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
-      // If it's base64: 
-      let loading = this.loadingCtrl.create({
-        content: 'Uploading Prescription Photo...'
-      });
-      loading.present(); 
+      // If it's base64:
+      console.log('image uploaded')
       this.prescriptionPhoto  ='data:image/jpeg;base64,'+imageData;
-      loading.dismiss(); 
+      console.log('loader dismissed')
+      loading.dismiss();  
          }, (err) => { 
-      // Handle error   y
-     }); 
+      
+      // Handle error   y 
+     });  
+   
   }
-
   showAddressModal(){
     const modal = this.modalCtrl.create('AddAddressModalPage');
     modal.present();
@@ -141,4 +159,6 @@ export class CartPage {
   gotoHome(){
     this.navCtrl.setRoot(TabsPage);
   }
+
+
 }         

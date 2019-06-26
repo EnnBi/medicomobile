@@ -13,12 +13,11 @@
 
 <ion-content style=" background-color: #F8F8F9;">
     <ion-list>
-        <ion-item style="margin-top: 4%">
+        <ion-item style="margin-top: 4%;box-shadow: 0px 3px 5px #c3c1c1, 0px -3px 5px #c3c1c1 !important;">
             <ion-row>
                 <ion-col col-3>
                     <ion-thumbnail item-start>
-                        <img src='{{user?.image?imagePath+user.image:"assets/imgs/boy.png"}}'>
-                        <ion-icon name='camera' style="position: relative;float: right;margin-top: -17px;" (click)="uploadPhoto()"></ion-icon>
+                        <img src='{{user?.image?imagePath+user.image:"assets/imgs/boy.png"}}' (click)="uploadPhoto()">
                     </ion-thumbnail>
                 </ion-col>
                 <ion-col col-9 style="margin: auto;width: 100%;padding-left: 15%;">
@@ -33,6 +32,10 @@
         </ion-item>
         <ion-item (click)="viewCart()">
             Cart
+            <ion-icon name="arrow-dropright" style=" float: right;"></ion-icon>
+        </ion-item>
+        <ion-item *ngIf='role?.includes("DELIVERY")' (click)="viewDeliveryOrders()">
+            Orders for delivery
             <ion-icon name="arrow-dropright" style=" float: right;"></ion-icon>
         </ion-item>
         <!--         <ion-item>

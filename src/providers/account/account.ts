@@ -16,7 +16,7 @@ export class AccountProvider {
   constructor(public http: HttpClient,public storage:Storage,public urlProvider:UrlProvider) {
     console.log('Hello AccountProvider Provider');
   } 
- 
+  
 
 getUser(){
    let url = this.urlProvider.getUser;
@@ -26,16 +26,6 @@ getUser(){
         return res;
       }); 
     });
-  }
-
-  viewOrders(){  
-    let url = this.urlProvider.getUserOrders;
-    return this.gettoken().flatMap(data => {
-      const requestHeaders  = new HttpHeaders().append('X-AUTH-TOKEN', data);
-      return this.http.get(url,{ headers: requestHeaders }).map((res:Response)=>{
-        return res;
-      }); 
-    }); 
   }
 
   uploadPhoto(image){
@@ -50,8 +40,18 @@ getUser(){
     }); 
   }
 
+  getRolesOfUser(){
+    return this.getrole().flatMap(data=>{
+      return data;
+    })
+  } 
 
   gettoken() {
     return Observable.fromPromise(this.storage.get('token'));
   }
+
+  getrole() { 
+    return Observable.fromPromise(this.storage.get('roles'));
+  } 
 }
+ 

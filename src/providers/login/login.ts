@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { UrlProvider } from '../../providers/url/url';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+
 /*
   Generated class for the LoginProvider provider.
 
@@ -16,15 +17,19 @@ export class LoginProvider {
     console.log('Hello LoginProvider Provider');
   }
 
-  login(user){
+  login(user):Observable<any>{
     const url = this.urlProvider.login;
-    return this.http.post(url,user);
+    return this.http.post(url,user).map((res:Response)=>{
+      console.log('-------in td rpovof');
+      console.log(res)
+      return res;
+    });
   }
 
   signup(user):Observable<any>{
     const url = this.urlProvider.register;
     return this.http.post(url,user).map((res:Response)=>{
-      return res.json();
+      return res;
     });
   }
 }

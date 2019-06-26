@@ -11,10 +11,10 @@
     </ion-navbar>
 
 </ion-header>
-<ion-content padding style=" background-color: #F8F8F9;">
+<ion-content style=" background-color: #F8F8F9;">
     <div *ngIf='orders'>
-        <ion-card *ngFor='let order of orders'>
-            <ion-grid style="border-bottom: 1px solid #b9bbbc;">
+        <ion-card *ngFor='let order of orders' (click)="viewOrder(order.id)">
+            <ion-grid style="border-bottom: 1px solid #eee;">
                 <ion-row>
                     <ion-col col-8 text-left>
                         <span style="color: #947c7c;">{{order.placedDate | date:'dd-MMM hh:mm a'}}</span>
@@ -47,7 +47,7 @@
                         </ng-template>
                     </ion-grid>
                 </div>
-                <ion-grid style="border-top: 1px solid #b9bbbc;">
+                <ion-grid style="border-top: 1px solid #eee;">
                     <ion-row>
                         <ion-col col-6 text-left>
                             <span>Total</span>

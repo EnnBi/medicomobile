@@ -22,7 +22,8 @@ import { LoginProvider } from '../providers/login/login';
 import { IonicStorageModule } from '@ionic/storage';
 import { OrdersProvider } from '../providers/orders/orders';
 import { AccountProvider } from '../providers/account/account';
-
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 @NgModule({
   declarations: [
     MyApp,
@@ -30,7 +31,7 @@ import { AccountProvider } from '../providers/account/account';
     ContactPage, 
     HomePage,
     TabsPage, 
-    LoginPage
+    LoginPage,
   ],
   imports: [
     HttpModule,
@@ -47,7 +48,7 @@ import { AccountProvider } from '../providers/account/account';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
   ],  
   providers: [
     Camera,
@@ -66,7 +67,9 @@ import { AccountProvider } from '../providers/account/account';
     OrdersProvider,
     AccountProvider,
     ImagePicker,
-    AccountProvider
+    AccountProvider,
+    Facebook,
+    GooglePlus
   ]
 })
 export class AppModule {}

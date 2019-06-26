@@ -17,20 +17,20 @@
     <ion-list>
         <ion-item>
             <ion-label stacked>Name</ion-label>
-            <ion-input type="text" name="name" [(ngModel)]="name"></ion-input>
+            <ion-input type="text" name="name" [(ngModel)]="name" required="required"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label stacked>Address</ion-label>
-            <ion-input type="text" [(ngModel)]="address"></ion-input>
+            <ion-input type="text" [(ngModel)]="address" required="required"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked>Landmark</ion-label>
-            <ion-input type="text" [(ngModel)]="landmark"></ion-input>
+            <ion-input type="text" [(ngModel)]="landmark" required="required"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked>Contact No</ion-label>
-            <ion-input type="text" [(ngModel)]="contact"></ion-input>
+            <ion-input type="number" [(ngModel)]="contact" required="required"></ion-input>
         </ion-item>
         <ion-grid>
             <ion-row>

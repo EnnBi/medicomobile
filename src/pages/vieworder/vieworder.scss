@@ -1,0 +1,85 @@
+page-vieworder {
+    @font-face {
+        font-family: "Ionicons";
+        src: url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.eot?v=2.0.1");
+        src: url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.eot?v=2.0.1#iefix") format("embedded-opentype"), url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.ttf?v=2.0.1") format("truetype"), url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.woff?v=2.0.1") format("woff"), url("https://code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.svg?v=2.0.1#Ionicons") format("svg");
+        font-weight: normal;
+        font-style: normal;
+    }
+    .orderStatus {
+        padding: 10px;
+        overflow: hidden;
+    }
+    .orderStatus .row {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        padding: 5px;
+        width: 100%;
+    }
+    .orderStatus .row .col {
+        display: block;
+        flex: 1 1 0;
+        padding: 5px;
+        width: 100%;
+        line-height: 12px;
+        position: relative;
+        text-align: center;
+        padding-top: 15px;
+        color: #aaa;
+    }
+    .orderStatus .row .col:before {
+        content: '';
+        width: 100%;
+        height: 5px;
+        background: #ccc;
+        top: 0px;
+        left: 0;
+        position: absolute;
+        margin: 0 0 0 -50%;
+    }
+    .orderStatus .row .col.done:before {
+        background: #56B500;
+    }
+    .orderStatus .row .col:first-child:before {
+        background: none;
+    }
+    .orderStatus .row .col:after {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        font-family: "Ionicons";
+        content: "\f361";
+        color: #eee;
+        font-size: 17px;
+        line-height: 22.5px;
+        background: #ccc;
+        left: 50%;
+        top: 0;
+        z-index: 999;
+        border-radius: 50%;
+        margin: -8px 0 0 -10px;
+    }
+    .orderStatus .row .col.done:after {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        font-family: "Ionicons";
+        content: "\f361";
+        color: #fff;
+        font-size: 17px;
+        line-height: 22.5px;
+        background: #56B500;
+        left: 50%;
+        top: 0;
+        z-index: 999;
+        border-radius: 50%;
+        margin: -8px 0 0 -10px;
+    }
+    .orderStatus .row .col.done {
+        color: #3d8f10
+    }
+    ion-grid {
+        box-shadow: 0px 3px 5px #c3c1c1, 0px -3px 5px #c3c1c1;
+    }
+}

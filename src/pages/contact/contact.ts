@@ -5,6 +5,8 @@ import { AccountProvider } from '../../providers/account/account';
 import { ImagePicker,ImagePickerOptions } from '@ionic-native/image-picker';
 import { Camera } from '@ionic-native/camera';
 import { UrlProvider } from '../../providers/url/url';
+import { Storage } from '@ionic/storage'
+import { OrdersProvider } from '../../providers/orders/orders';
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'
@@ -12,23 +14,30 @@ import { UrlProvider } from '../../providers/url/url';
 export class ContactPage{
 
   public user:any;
+  public role:string[]; 
   public imagePath:string = this.urlProvider.images;
  
   constructor(public navCtrl: NavController,public appCtrl:App,
-              public accountProvider:AccountProvider,private imagePicker: ImagePicker,
+              public accountProvider:AccountProvider,public orderProvider:OrdersProvider,private imagePicker: ImagePicker,
               private camera: Camera,public urlProvider:UrlProvider,public loadingCtrl:LoadingController,
-              public zone:NgZone) {
+              public zone:NgZone,public storage:Storage) {
 
   }
-  ionViewDidLoad(){ 
+  ionViewDidLoad(){  
+    this.accountProvider.getRolesOfUser().subscribe(res=>{
+      console.log('ion view load before role')
+      console.log(res);
+        this.role =  res as Array<string>; 
+    });
+    console.log('ion view load after role')
 
     this.accountProvider.getUser().subscribe(res=>{
-      this.user = res;
+      this.user = res; 
     });
   }
 
   viewOrders(){ 
-    this.accountProvider.viewOrders().subscribe(res=>{
+    this.orderProvider.viewOrders().subscribe(res=>{
       console.log('Response')
       console.log(res);
       this.navCtrl.push('OrdersPage');
@@ -71,8 +80,14 @@ export class ContactPage{
     this.navCtrl.push('CartPage');
   }
   signout(){
+    this.storage.remove('token');
+    this.storage.remove('roles');
     this.appCtrl.getRootNav().setRoot(LoginPage);
  }
 
+ viewDeliveryOrders(){
+   this.navCtrl.push('DeliveryOrdersPage');
+ }
+   
 }
   

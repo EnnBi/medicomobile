@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AccountProvider } from '../../providers/account/account';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { OrdersProvider } from '../../providers/orders/orders';
 
 /**
  * Generated class for the OrdersPage page.
@@ -19,14 +19,20 @@ export class OrdersPage {
  public orders:any=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-              public accountProvider:AccountProvider) {
+              public orderProvider:OrdersProvider,public toastCtrl:ToastController,public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrdersPage');
-    this.accountProvider.viewOrders().subscribe(res=>{
+    this.orderProvider.viewOrders().subscribe(res=>{
       this.orders = res;
-    });
+    }); 
   }
 
+  viewOrder(id){
+    console.log('----'+id)
+    this.navCtrl.push('VieworderPage',{'id':id,'viaDelivery':false});
+  }  
+
+  
 }

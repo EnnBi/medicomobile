@@ -13,7 +13,7 @@ import 'rxjs/add/observable/fromPromise';
   and Angular DI
 */
 @Injectable()
-export class CartProvider {
+export class CartProvider { 
 
   textMedicinesList:any=[];
   medicinesList:any=[];
@@ -52,7 +52,7 @@ export class CartProvider {
 
   postCartItems(){
    return this.gettoken().flatMap(data => {
-      let url = this.urlProvider.postOrder;
+      let url = this.urlProvider.order;
       const order = this.createOrder();
       const requestHeaders  = new HttpHeaders().append('X-AUTH-TOKEN', data);
       return this.http.post(url,order,{ headers: requestHeaders }).map((res:Response)=>{

@@ -32,4 +32,16 @@ export class SearchProvider {
   gettoken() {
     return Observable.fromPromise(this.storage.get('token'));
   }
+
+  getMedicineOnId(id):Observable<any>{
+    const url = this.urlProvider.medicineOnId+id;
+    return this.gettoken().flatMap(data=>{
+      console.log('before in provider');
+      var requestHeaders = new HttpHeaders().append('X-AUTH-TOKEN',data);
+      return this.http.get(url,{headers: requestHeaders}).map((res:Response)=>{
+        console.log('after in provider')
+          return res;
+        }); 
+    });
+  }
 }

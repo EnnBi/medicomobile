@@ -1,0 +1,151 @@
+<!--
+  Generated template for the VieworderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Order</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style=" background-color: #EEEEF8;">
+    <div *ngIf='order'>
+        <ion-grid style="background-color: white;padding-bottom: 0px;" margin-top>
+            <ion-row>
+                <ion-col col-9>
+                    <h6>Order ID: {{order.orderId}}</h6>
+                    <p style="font-size: 1.2em;color: #888484;">{{order.placedDate | date:'dd-MMM hh:mm a'}}</p>
+                </ion-col>
+                <ion-col col-3 text-right>
+                    <p style="font-size: 1.2em;color: #488AFF;">{{order.status}}</p>
+                </ion-col>
+            </ion-row>
+            <div style="border: 1px solid #eee;"></div>
+            <ion-row>
+                <ion-col col-6 style="margin-top: 1em;font-size: 1.4em;">
+                    <span>{{order.address.name}}</span>
+                </ion-col>
+                <ion-col col-6 style="margin-top: 1em;font-size: 1.4em;text-align: right">
+                    <span>{{order.address.contact}}</span>
+                </ion-col>
+                <ion-col style="color: #888484;font-size: 1.15em;">
+                    <p>{{order.address.address}},{{order.address.landmark}} </p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid style="background-color: white;padding-bottom: 0px;" margin-top>
+            <div class="orderStatus">
+                <ul class="row">
+                    <li class="col" [ngClass]="getIndexOfStatus()>=0?'done':''"><span>Placed</span> <br><span>{{order.placedDate | date:'dd-MMM'}}</span> <br><span>{{order.placedDate | date:'hh:mm'}}</span></li>
+                    <li class="col" [ngClass]="getIndexOfStatus()>=1?'done':''">Confirmed <br><span *ngIf="order.confirmedDate"> {{order.confirmedDate | date:'dd-MMM'}}</span> <br><span *ngIf="order.confirmedDate"> {{order.confirmedDate | date:'hh:mm'}}</span></li>
+                    <li class="col" [ngClass]="getIndexOfStatus()>=2?'done':''">Shipped <br><span *ngIf="order.shippedDate"> {{order.shippedDate | date:'dd-MMM'}}</span> <br><span *ngIf="order.shippedDate"> {{order.shippedDate | date:'hh:mm'}}</span></li>
+                    <li class="col" [ngClass]="getIndexOfStatus()>=3?'done':''">Deliverd <br><span *ngIf="order.deliveredDate"> {{order.deliveredDate | date:'dd-MMM'}}</span> <br><span *ngIf="order.deliveredDate"> {{order.deliveredDate | date:'hh:mm'}}</span></li>
+                </ul>
+            </div>
+        </ion-grid>
+        <ion-grid style="background-color: white;padding-bottom: 0px;" margin-top>
+            <ion-row style="border-bottom: 1px solid #eee;margin:.5em 0 .5em 0">
+                <ion-col col-7>
+                    <span>Medicine Details</span>
+                </ion-col>
+                <ion-col col-2>
+                    <span>Available</span>
+                </ion-col>
+                <ion-col col-3>
+                    <span></span>
+                </ion-col>
+            </ion-row>
+            <div *ngFor='let item of order.cartItems'>
+                <ion-row *ngIf='item.medicine;else textmedicine'>
+                    <ion-col col-7>
+                        <p style="margin:0px;font-size: 1.3em;">{{item.medicine.name}}</p>
+                        <p style="margin:0px;color: #888484">{{item.medicine.description}}</p>
+                        <p style="margin:0px;color: #888484">{{item.medicine.company.name}}</p>
+                    </ion-col>
+                    <ion-col col-2 center margin-top padding-left [ngSwitch]='item.available'>
+                        <ion-icon *ngSwitchCase="true" name="checkmark-circle" style="font-size: 2.0em;color: #3d8f10;"></ion-icon>
+                        <ion-icon *ngSwitchDefault name="help-circle" style="font-size: 2.0em;color: orange;"></ion-icon>
+                        <ion-icon *ngSwitchCase="false" name="close-circle" style="font-size: 2.0em;color: #f63131;"></ion-icon>
+                    </ion-col>
+                    <ion-col col-3 text-right>
+                        <p style="margin:0px;font-size: 1.3em;">{{item.medicine.price}}</p>
+                        <p style="font-size: 1.3em;">×{{item.quantity}}</p>
+                    </ion-col>
+                </ion-row>
+                <ng-template #textmedicine>
+                    <ion-row>
+                        <ion-col col-7>
+                            <p style="margin:0px;font-size: 1.3em;">{{item.textMedicine.name}} </p>
+                            <p style="margin:0px;color: #888484">Description not available</p>
+                            <p style="margin:0px;color: #888484">{{item.textMedicine.company}}</p>
+                        </ion-col>
+                        <ion-col col-2 center margin-top padding-left [ngSwitch]='item.available'>
+                            <ion-icon *ngSwitchCase="true" name="checkmark-circle" style="font-size: 2.0em;color: #3d8f10;"></ion-icon>
+                            <ion-icon *ngSwitchDefault name="help-circle" style="font-size: 2.0em;color: orange;"></ion-icon>
+                            <ion-icon *ngSwitchCase="false" name="close-circle" style="font-size: 2.0em;color: #f63131;"></ion-icon>
+                        </ion-col>
+                        <ion-col col-3 text-right>
+                            <p style="margin:0px;font-size: 1.3em;" *ngIf='item.textMedicine.price;else noprice'>{{item.textMedicine.price}}</p>
+                            <ng-template #noprice>
+                                <!--<ion-icon style="margin:0px;font-size: 1.3em;color: orange;" name="help-circle"></ion-icon>-->
+                                <p style="margin:0px;font-size: 1.3em;">Not known yet</p>
+                            </ng-template>
+                            <p style="font-size: 1.3em;">×{{item.quantity}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ng-template>
+            </div>
+        </ion-grid>
+        <ion-grid style="background-color: white;padding-bottom: 0px;" margin-top>
+            <ion-row style="border-bottom:1px solid #eee;font-size:1.3em">
+                <ion-col col-6>
+                    <p>Sub-Total:</p>
+                </ion-col>
+                <ion-col col-6 text-right>
+                    <p>₹ {{order.total}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row style="border-bottom:1px solid #eee;font-size:1.3em">
+                <ion-col col-6>
+                    <p>Shipping:</p>
+                </ion-col>
+                <ion-col col-6 text-right>
+                    <p>Free Delivery</p>
+                </ion-col>
+            </ion-row>
+            <ion-row style="border-bottom:1px solid #eee;font-size:1.3em">
+                <ion-col col-6>
+                    <p>Total</p>
+                </ion-col>
+                <ion-col col-6 text-right>
+                    <p>₹{{order.total}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid ion-fixed *ngIf="viaDelivery && order.status=='Shipped';else notdelivery" style="background-color: white;padding-bottom: 0px;" margin-top>
+            <ion-row style="border-bottom:1px solid #eee;font-size:1.3em">
+                <ion-col col-6 col-md-6 col-lg-6 col-xl-6>
+                    <button ion-button outline block (click)="changeOrderStatus(delivered,order.orderId)">Delivered</button>
+                </ion-col>
+                <ion-col col-6 col-md-6 col-lg-6 col-xl-6>
+                    <button ion-button color="danger" outline block (click)="alertForCancel(cancelled,order.orderId)">Cancelled</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ng-template #notdelivery>
+            <ion-grid ion-fixed *ngIf='order.status == "Placed"' style="background-color: white;padding-bottom: 0px;" margin-top>
+                <ion-row style="border-bottom:1px solid #eee;font-size:1.3em">
+                    <ion-col>
+                        <button ion-button color="danger" outline block (click)="alertForCancel(cancelled,order.orderId)">Cancelled</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ng-template>
+    </div>
+</ion-content>

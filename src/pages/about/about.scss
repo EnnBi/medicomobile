@@ -27,4 +27,50 @@ page-about {
             }
         }
     }
+    .search-icon {
+        font-size: 2em;
+        margin-right: 2px;
+    }
+    .cart-icon {
+        font-size: 2em;
+        margin-right: 10px;
+    }
+    ion-searchbar {
+        display: inline-block;
+        width: 88%;
+    }
+    .searchbar-active-buttons {
+        display: inline-block;
+        width: 10%;
+    }
+    ion-col {
+        border: #f1eeee 1px solid;
+        padding: 15px;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 0px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    p {
+        text-align: center;
+        color: #959595;
+        margin-top: 6px
+    }
+    .dosage {
+        font-weight: lighter;
+        font-size: 1em;
+        margin-top: 0px !important;
+        margin-bottom: 10px !important;
+    }
+    .price {
+        font-weight: bold;
+        font-size: 1em;
+        color: #488AFF;
+        text-align: right;
+        margin-top: 0px !important;
+        margin-bottom: 10px !important;
+    }
 }

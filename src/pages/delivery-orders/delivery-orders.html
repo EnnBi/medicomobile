@@ -1,0 +1,206 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Delivery Orders</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content style="background-color: #F9F9FA;">
+    <ion-segment ion-fixed class="SwipedTabs-tabs" style="width:100% !important;">
+        <ion-segment-button *ngFor='let tab of tabs ; let i = index ' value="IngoreMe" (click)="selectTab(i)" [ngClass]='{ "SwipedTabs-activeTab" : ( this.SwipedTabsSlider  && ( this.SwipedTabsSlider.getActiveIndex() === i || (  tabs.length -1 === i&& this.SwipedTabsSlider.isEnd()))) }'
+            [ngStyle]="{'width.%': (this.tabElementWidth_px)}" style="opacity: 1 !important;">
+            {{tab}}
+        </ion-segment-button>
+    </ion-segment>
+
+    <!-- here is our dynamic line  "indicator"-->
+    <div id='indicator' ion-fixed class="SwipedTabs-indicatorSegment" [ngStyle]="{'width.%': (this.tabElementWidth_px)}"></div>
+
+
+    <ion-slides #SwipedTabsSlider (ionSlideDrag)="animateIndicator($event)" (ionSlideWillChange)="updateIndicatorPosition()" (ionSlideDidChange)="updateIndicatorPosition()" (pan)="updateIndicatorPosition()" [pager]="false">
+        <ion-slide>
+            <div *ngIf='pendingOrders?.length>0;else nodeliveredorders'>
+                <ion-refresher (ionRefresh)="getPendingOrders($event,true)">
+                    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+                    </ion-refresher-content>
+                </ion-refresher>
+                <ion-card *ngFor='let order of pendingOrders' (click)="viewOrder(order.id)">
+                    <ion-grid style="border-bottom: 1px solid #eee;">
+                        <ion-row>
+                            <ion-col col-8 text-left>
+                                <span style="color: #947c7c;">{{order.placedDate | date:'dd-MMM hh:mm a'}}</span>
+                            </ion-col>
+                            <ion-col col-4 text-right>
+                                <span style="color: #488AFF;">{{order.status}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <ion-list>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-6 text-left>
+                                    <span>{{order.address.name}}</span>
+                                </ion-col>
+                                <ion-col col-6 text-right>
+                                    <span>{{order.address.contact}}</span>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-12 text-left>
+                                    <span>{{order.address.address}}</span>
+                                    <span>{{order.address.landmark}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid style="border-top: 1px solid #eee;">
+                            <ion-row>
+                                <ion-col col-6 text-left>
+                                    <span>Total</span>
+                                </ion-col>
+                                <ion-col col-6 text-right>
+                                    <span style="color: #488AFF;">₹ {{order.total}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-list>
+
+                </ion-card>
+                <ion-infinite-scroll *ngIf='hasMorePendingOrders; else nomorepending' (ionInfinite)="getPendingOrders($event,false)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more orders...">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+                <ng-template #nomorepending>
+                    <div style="text-align: center;color: #b0b0b0;margin: 1em;height: 2em;">No more data</div>
+                </ng-template>
+            </div>
+            <ng-template #nodeliveredorders>
+                <div style="color: #c8c9cb;display: flex;height: 75%;">
+                    <h1 style="margin:auto">You have no pending orders</h1>
+                </div>
+            </ng-template>
+        </ion-slide>
+        <ion-slide>
+            <div *ngIf='deliveredOrders?.length>0; else nodeliveredorders'>
+                <ion-refresher (ionRefresh)="getDeliveredOrders($event,true)">
+                    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+                    </ion-refresher-content>
+                </ion-refresher>
+                <ion-card *ngFor='let order of deliveredOrders' (click)="viewOrder(order.id)">
+                    <ion-grid style="border-bottom: 1px solid #eee;">
+                        <ion-row>
+                            <ion-col col-8 text-left>
+                                <span style="color: #947c7c;">{{order.placedDate | date:'dd-MMM hh:mm a'}}</span>
+                            </ion-col>
+                            <ion-col col-4 text-right>
+                                <span style="color: #488AFF;">{{order.status}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <ion-list>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-6 text-left>
+                                    <span>{{order.address.name}}</span>
+                                </ion-col>
+                                <ion-col col-6 text-right>
+                                    <span>{{order.address.contact}}</span>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-12 text-left>
+                                    <span>{{order.address.address}}</span>
+                                    <span>{{order.address.landmark}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid style="border-top: 1px solid #eee;">
+                            <ion-row>
+                                <ion-col col-6 text-left>
+                                    <span>Total</span>
+                                </ion-col>
+                                <ion-col col-6 text-right>
+                                    <span style="color: #488AFF;">₹ {{order.total}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-list>
+
+                </ion-card>
+                <ion-infinite-scroll *ngIf='hasMoreDeliveredOrders; else nomoredelivered' (ionInfinite)="getDeliveredOrders($event,false)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more orders...">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+                <ng-template #nomoredelivered>
+                    <div style="text-align: center;color: #b0b0b0;margin: 1em;height: 2em;">No more data</div>
+                </ng-template>
+            </div>
+            <ng-template #nodeliveredorders>
+                <div style="color: #c8c9cb;display: flex;height: 75%;">
+                    <h1 style="margin:auto">You have no delivered orders</h1>
+                </div>
+            </ng-template>
+        </ion-slide>
+        <ion-slide>
+            <div *ngIf='cancelledOrders?.length>0;else nocancelledorders'>
+                <ion-refresher (ionRefresh)="getCancelledOrders($event,true)">
+                    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+                    </ion-refresher-content>
+                </ion-refresher>
+                <ion-card *ngFor='let order of cancelledOrders' (click)="viewOrder(order.id)">
+                    <ion-grid style="border-bottom: 1px solid #eee;">
+                        <ion-row>
+                            <ion-col col-8 text-left>
+                                <span style="color: #947c7c;">{{order.placedDate | date:'dd-MMM hh:mm a'}}</span>
+                            </ion-col>
+                            <ion-col col-4 text-right>
+                                <span style="color: #488AFF;">{{order.status}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <ion-list>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-6 text-left>
+                                    <span>{{order.address.name}}</span>
+                                </ion-col>
+                                <ion-col col-6 text-right>
+                                    <span>{{order.address.contact}}</span>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-12 text-left>
+                                    <span>{{order.address.address}}</span>
+                                    <span>{{order.address.landmark}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid style="border-top: 1px solid #eee;">
+                            <ion-row>
+                                <ion-col col-6 text-left>
+                                    <span>Total</span>
+                                </ion-col>
+                                <ion-col col-6 text-right>
+                                    <span style="color: #488AFF;">₹ {{order.total}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-list>
+
+                </ion-card>
+                <ion-infinite-scroll *ngIf='hasMoreCancelledOrders; else nomorecancelled' (ionInfinite)="getCancelledOrders($event,false)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more orders...">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+                <ng-template #nomorecancelled>
+                    <div style="text-align: center;color: #b0b0b0;margin: 1em;height: 2em;">No more data</div>
+                </ng-template>
+            </div>
+            <ng-template #nocancelledorders>
+                <div style="color: #c8c9cb;display: flex;height: 75%;">
+                    <h1 style="margin:auto">You have no cancelled orders</h1>
+                </div>
+            </ng-template>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

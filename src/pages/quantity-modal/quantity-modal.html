@@ -7,19 +7,23 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>Add Quantity</ion-title>
+        <ion-title style="text-align: center">Add Quantity</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-row style="height: 70px;">
-        <ion-icon name="remove-circle" (click)="decrement()" large style="font-size: 4em;margin-left: 8%;color:#488AFF"></ion-icon>
-        <p style="font-size: 4em;margin-top:0px;margin-right: 20px;margin-left: 20px">{{quantity}}</p>
-        <ion-icon name="add-circle" (click)="increment()" large style="font-size: 4em;color:#488AFF"></ion-icon>
-    </ion-row>
-    <ion-buttons text-center>
-        <button ion-button (click)="addToCart()">Add to Bag</button>
-    </ion-buttons>
+    <div *ngIf="medicine">
+        <h2 style="text-align: center">{{medicine.name}}</h2>
+        <p style="text-align: center;color: #959595;margin-top: 6px">{{medicine.description}}</p>
+        <ion-row style="height: 70px;justify-content: center; flex-direction: column-reverse">
+            <ion-icon name="remove-circle" (click)="decrement()" large style="font-size: 4em;margin-left: 8%;color:#488AFF"></ion-icon>
+            <p style="font-size: 3.5em;margin-top:0px;margin-bottom:0px;margin-right:5px;margin-left: 5px;width: 70px;border: 1px solid;text-align: center;border-radius: 20px;border-color: grey;">{{quantity}}</p>
+            <ion-icon name="add-circle" (click)="increment()" large style="font-size: 4em;color:#488AFF"></ion-icon>
+        </ion-row>
+        <ion-buttons text-center>
+            <button ion-button (click)="addToCart()">Add to Bag</button>
+        </ion-buttons>
+    </div>
 </ion-content>

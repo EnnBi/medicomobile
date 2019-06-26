@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 import { CartProvider } from '../../providers/cart/cart';
+import { SearchProvider } from '../../providers/search/search';
 
 /**
  * Generated class for the QuantityModalPage page.
@@ -16,22 +17,32 @@ import { CartProvider } from '../../providers/cart/cart';
 })
 export class QuantityModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, public navParams: NavParams,private searchProvider:SearchProvider,
               private cartProvider:CartProvider,public viewCtrl:ViewController) {
   }
 
   quantity:number;
   medicineId:number;
+  medicine:any;
   ionViewDidLoad() {
     this.quantity=1; 
     this.medicineId=this.navParams.get('id');
+    console.log('before request')
+    this.searchProvider.getMedicineOnId(this.medicineId).subscribe((res)=>{
+      console.log('-----=-=-=-=-=-=-SS')
+      console.log(res);
+      this.medicine = res;
+    },(err)=>{
+      this.viewCtrl.dismiss();
+    });
   }
 
   increment(){
-    this.quantity= this.quantity+1;
+    if(this.quantity<99)
+      this.quantity= this.quantity+1;
   }
   decrement(){
-    if(this.quantity>0)
+    if(this.quantity>1)
       this.quantity= this.quantity-1;
   } 
 
